@@ -12,6 +12,10 @@
   },
   "homepage": "https://github.com/fczbkk/avast-workshop#readme",
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "babel-loader": "^8.0.5",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14",
     "karma-webpack": "^3.0.5",
     "webpack": "^4.23.1",
     "chai": "^4.2.0",
@@ -24,6 +28,8 @@
   },
   "scripts": {
     "test": "karma start ./karma.conf.js",
-    "dev": "npm run test -- --no-single-run --auto-watch"
+    "test:dev": "npm run test -- --no-single-run --auto-watch",
+    "build": "webpack --config webpack.config.js",
+    "dev": "webpack-dev-server --config webpack.config.js"
   }
 }

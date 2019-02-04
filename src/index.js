@@ -16,9 +16,11 @@ export function createInput () {
   document.body.appendChild(element)
   element.handleSubmit = function () {
     addData(localStorage, element.value)
+    updateList(localStorage, element.todoList)
     element.value = ''
   }
-  element.addEventListener('keyPress', function (event) {
+  element.addEventListener('keypress', function (event) {
+    console.log('event', event)
     if (event.key === 'Enter') {
       element.handleSubmit()
     }
@@ -36,4 +38,11 @@ export function updateList (storage, element) {
   element.innerHTML = getData(storage)
     .map((item) => `<li>${item}</li>`)
     .join('')
+}
+
+export function createTodo (storage) {
+  const input = createInput()
+  const list = createList()
+  updateList(localStorage, list)
+  input.todoList = list
 }
