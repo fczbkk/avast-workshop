@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const {getData, addData, DATA_KEY} = require('./index')
+const {getData, addData, DATA_KEY, createInput} = require('./index')
 
 describe('TODO app', function () {
 
@@ -39,6 +39,39 @@ describe('TODO app', function () {
       addData(localStorage, 'bbb')
       const result = getData(localStorage)
       assert.deepEqual(result, ['aaa', 'bbb'])
+    })
+
+  })
+
+  describe('createInput', function () {
+
+    it('should be created', function () {
+      const result = createInput()
+      assert.exists(result)
+    })
+
+    it('should be INPUT', function () {
+      const result = createInput()
+      assert.equal('INPUT', result.tagName)
+    })
+
+    it('should be added to document', function () {
+      const result = createInput()
+      assert.equal(result.parentNode, document.body)
+    })
+
+    it('should call `addData` on Enter', function () {
+      const element = createInput()
+      element.value = 'aaa'
+      element.handleSubmit()
+      assert.deepEqual(getData(localStorage), ['aaa'])
+    })
+
+    it('should empty value on Enter', function () {
+      const element = createInput()
+      element.value = 'aaa'
+      element.handleSubmit()
+      assert.equal(element.value, '')
     })
 
   })
