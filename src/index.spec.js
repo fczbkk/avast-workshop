@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const {getData, addData, DATA_KEY, createInput} = require('./index')
+const {getData, addData, DATA_KEY, createInput, createList, updateList} = require('./index')
 
 describe('TODO app', function () {
 
@@ -72,6 +72,39 @@ describe('TODO app', function () {
       element.value = 'aaa'
       element.handleSubmit()
       assert.equal(element.value, '')
+    })
+
+  })
+
+  describe('createList', function () {
+
+    it('should be created', function () {
+      const result = createList()
+      assert.exists(result)
+    })
+
+    it('should be UL', function () {
+      const result = createList()
+      assert.equal('UL', result.tagName)
+    })
+
+    it('should be empty', function () {
+      const result = createList()
+      assert.equal(result.childNodes.length, 0)
+    })
+
+  })
+
+  describe('updateList', function () {
+
+    it('should add items to list', function () {
+      const element = createList()
+      addData(localStorage, 'aaa')
+      addData(localStorage, 'bbb')
+      updateList(localStorage, element)
+      const children = element.querySelectorAll('li')
+      assert.equal(children[0].innerHTML, 'aaa')
+      assert.equal(children[1].innerHTML, 'bbb')
     })
 
   })

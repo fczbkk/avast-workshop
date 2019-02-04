@@ -27,9 +27,13 @@ export function createInput () {
 }
 
 export function createList () {
-
+  const element = document.createElement('ul')
+  document.body.appendChild(element)
+  return element
 }
 
-export function updateList () {
-
+export function updateList (storage, element) {
+  element.innerHTML = getData(storage)
+    .map((item) => `<li>${item}</li>`)
+    .join('')
 }
